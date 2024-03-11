@@ -114,4 +114,21 @@ button{
 
 
 
+/* Elementos de Feedback.html*/
 
+#h1Texto{
+
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+}
+
+#h4Texto{
+
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+
+}
