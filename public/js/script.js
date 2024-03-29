@@ -40,9 +40,16 @@ function carrito() {
          total += parseFloat(producto.precio.slice(1)); // Elimina el signo $ y convierte el precio a número
     });
 
+    // Dividir el total en parte entera y fraccional
+    const parteEntera = Math.floor(total);
+    const parteFraccional = (total - parteEntera).toFixed(2);
+
+    // Formatear el total con coma como separador decimal y el símbolo de dólar
+    const totalFormateado = `${parteEntera.toLocaleString('es-ES')},${parteFraccional.slice(2)}`;
+
     // Mostrar el total en la página HTML
     const totalElement = document.getElementById("total");
-    totalElement.textContent = total.toFixed(2); // Mostrar el total con 2 decimales
+    totalElement.textContent = totalFormateado; // Mostrar el total formateado
 }
 
 function vaciarCarrito(){
@@ -75,7 +82,7 @@ function continuarCompra() {
     
     if (metodoPago) {
         const metodoSeleccionado = metodoPago.value;
-        console.log(`Se ha seleccionado el método de pago: ${metodoSeleccionado}`);
+        window.alert(`Se ha seleccionado el método de pago: ${metodoSeleccionado}`);
         // Aquí puedes agregar cualquier lógica adicional, como redirigir al usuario a una página de confirmación.
     } else {
         window.alert("Por favor selecciona un método de pago antes de continuar.");

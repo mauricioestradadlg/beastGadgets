@@ -1,0 +1,204 @@
+/* INICIO */
+
+
+
+#h1Inicio{
+
+    color: white;
+    font-size: 50px;
+    text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  #h4Inicio{
+  
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+  @media (max-width: 767px){
+
+    #h1Inicio{
+      font-size: 30px;
+
+    }
+    
+    #h4Inicio{
+      font-size: 15px;
+    }
+
+    .imagenInicio{
+      height: 175px;
+      width: 250px;
+    }
+
+  }
+
+  
+/* ABOUT US */
+
+
+#h1AU{
+
+    color: white;
+    font-size: 50px;
+    text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+    font-family: Arial, Helvetica, sans-serif;
+  
+  }
+  
+  .parrafoAU{
+    font-size: 40px;
+    color: white;
+    text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+  }
+  
+
+  @media (max-width: 767px){
+
+    #h1AU{
+      font-size: 30px;
+  
+    }
+    
+    .parrafoAU{
+      font-size: 20px;
+    }
+
+    .imagenAU{
+      height: 175px;
+      width: 250px;
+    }
+
+  }
+  
+
+
+
+/* CONTACTO */
+
+
+/* Labels del formulario*/
+label{
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+textarea{
+  width: 300px; /* Ancho fijo */
+  height: 200px; /* Altura fija */
+  resize: none; /* Deshabilita la redimensionabilidad */
+}
+
+#h1C, #h2C{
+  font-size: 40px;
+  color: white;
+  text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+}
+
+#pC{
+  font-size: 30px;
+  color: white;
+  text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+}
+
+
+@media (max-width: 767px){
+
+  #h1C, #h2C{
+    font-size: 30px;
+    color: white;
+    text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+  }
+  
+  #pC{
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
+  }
+
+  .imagenContacto{
+      height: 175px;
+      width: 250px;
+  }
+
+}
+
+
+/* PRODUCTOS */
+
+#h2P, #pMethod{
+
+  font-size: 30px;
+  color: white;
+  text-shadow: 2px 5px 5px black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.nombre, .precio{
+
+  font-size: 20px;
+  color: white;
+  text-shadow: 2px 5px 5px black;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#carrito, #cuenta{
+  font-size: 25px;
+  color: white;
+  text-shadow: 2px 5px 5px black;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+@media (max-width: 767px){
+
+  .imagenProducto{
+    height: 175px;
+    width: 250px;
+  }
+}
+
+
+
+/* BOTONES */
+
+
+button{
+
+  background-color: rgb(2, 8, 92);
+  color: white;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-color: black;
+  border-radius: 30px;
+  
+}
+
+
+
+/* EXITO */
+
+
+.h4Exito{
+
+  font-size: 30px;
+  color: white;
+  text-shadow: 2px 5px 5px black;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.pExito{
+  font-size: 20px;
+  color: white;
+  text-shadow: 2px 5px 5px black;
+  font-family: Arial, Helvetica, sans-serif;
+}
