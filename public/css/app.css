@@ -137,7 +137,7 @@ textarea{
 
 
 
-/* Contacto Tabletas pequeñas */
+/* Contacto Smartphones */
 
 @media (max-width: 767px){
 
@@ -186,38 +186,97 @@ textarea{
 
 /* PRODUCTOS */
 
-#h2P, #pMethod{
+#divProducto {
+  display:inline-flex;
+  margin: 10px;
+}
 
+.producto {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.imagenProducto {
+  height: 300px;
+  width: 400px;
+}
+
+.h4Producto {
   font-size: 30px;
   color: white;
-  text-shadow: 2px 5px 5px black;
-  font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 2px 5px 5px hsl(0, 0%, 0%);
 }
 
 
-.nombre, .precio{
 
-  font-size: 20px;
-  color: white;
-  text-shadow: 2px 5px 5px black;
-  font-family: Arial, Helvetica, sans-serif;
-
-}
-
-#carrito, #cuenta{
-  font-size: 25px;
-  color: white;
-  text-shadow: 2px 5px 5px black;
-  font-family: Arial, Helvetica, sans-serif;
-
-}
-
+/* Productos Smartphones */
 @media (max-width: 767px){
 
-  .imagenProducto{
-    height: 175px;
-    width: 250px;
+  #divProducto {
+    display:inline-block;
+    margin: 5px;
   }
+
+  .imagenProducto{
+    height: 120px;
+    width: 160px;
+  }
+
+  .producto {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+}
+
+/* Productos Tabletas pequeñas */
+@media (min-width: 768px) and (max-width: 1023px){
+
+  #divProducto {
+    display:inline-block;
+    margin: 8px;
+  }
+
+  .imagenProducto{
+    height: 160px;
+    width: 200px;
+  }
+
+  .producto {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+  }
+
+}
+
+/* Productos Laptops y tabletas grandes */
+
+@media(min-width: 1024px) and (max-width: 1439px){
+
+  .h4Producto {
+    font-size: 50px;
+    color: white;
+    text-shadow: 2px 5px 5px hsl(0, 0%, 0%);
+  }
+  
+  #divProducto {
+    display:inline-flex;
+    margin: 8px;
+  }
+
+  .imagenProducto{
+    height: 200px;
+    width: 260px;
+  }
+
+  .producto {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+  }
+
 }
 
 
