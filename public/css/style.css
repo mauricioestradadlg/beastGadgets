@@ -60,15 +60,7 @@ header{
     margin-top: 0px;
     float: left;
   }
-  
-  /* Texto de la barra de navegacion*/
-  .navbar a{
-    color: hsl(0, 0%, 0%);
-    display: block;
-    text-align: center;
-    font-size: 40px;
-    font-family: Arial, Helvetica, sans-serif
-  }
+
   
   /* Color al seleccionar una opcion de la navegacion*/
   .navbar a:hover{
@@ -96,8 +88,8 @@ header{
     margin-bottom: 0px; /* Espacio entre los elementos */
   }
 
-  
-/* NAV Smartphones */
+
+  /* NAV Smartphones */
   
   @media (max-width: 767px){
 
@@ -116,28 +108,42 @@ header{
   
   }
 
-  /* NAV Laptops */
-  
-  @media (min-width: 1280px) and (max-width: 1439px){
-  
+  /* NAV Tabletas pequeñas */
+  @media (min-width: 768px) and (max-width: 1023px){
+
     .navbar a{
-        font-size: 50px;
+      font-size: 30px;
+  }
+
+  .navbar li{
+      margin: 15px;
+  }
+
+  .navbar {
+      height: 80px;
+  
+  }
+    
+  }
+
+  /* NAV Laptops y tabletas grandes */
+
+  @media(min-width: 1024px) and (max-width: 1439px){
+  
+
+    .navbar a{
+        font-size: 40px;
     }
   
     .navbar li{
-        margin: 30px;
+        margin: 15px;
     }
   
     .navbar {
-        height: 120px;
+        height: 100px;
     
     }
-  
   }
-
-
-
-  
 
   /* FOOTER */
 
