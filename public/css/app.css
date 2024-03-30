@@ -56,6 +56,7 @@
     text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
   }
   
+  /* AU Smartphones */
 
   @media (max-width: 767px){
 
@@ -74,6 +75,28 @@
     }
 
   }
+
+/* AU Tabletas pequeñas */
+@media (min-width: 768px) and (max-width: 1023px){
+
+  .imagenAU{
+    height: 290px;
+    width: 390px;
+  }
+
+  
+}
+
+/* AU Laptops y tabletas grandes */
+
+@media(min-width: 1024px) and (max-width: 1439px){
+  .imagenAU{
+    height: 520px;
+    width: 730px;
+  }
+
+}
+
   
 
 
@@ -107,6 +130,14 @@ textarea{
   text-shadow: 1px 5px 5px hsl(0, 0%, 0%);
 }
 
+.imagenContacto{
+  height: 800px;
+  width: 1000px;
+}
+
+
+
+/* Contacto Tabletas pequeñas */
 
 @media (max-width: 767px){
 
@@ -126,6 +157,29 @@ textarea{
       height: 175px;
       width: 250px;
   }
+
+}
+
+
+/* Contacto Tabletas pequeñas */
+@media (min-width: 768px) and (max-width: 1023px){
+
+    .imagenContacto{
+      height: 310px;
+      width: 420px;
+  }
+ 
+}
+
+/* Contacto Laptops y tabletas grandes */
+
+@media(min-width: 1024px) and (max-width: 1439px){
+
+  .imagenContacto{
+    height: 400px;
+    width: 540px;
+}
+
 
 }
 
