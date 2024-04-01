@@ -163,3 +163,12 @@ header{
   
     flex: 1;
   }
+
+
+
+  /* CARRITO DE COMPRAS */
+
+
+  #carritoCompras{
+    margin-left: 580px;
+  }
