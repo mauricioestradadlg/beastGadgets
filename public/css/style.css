@@ -166,9 +166,20 @@ header{
 
 
 
-  /* CARRITO DE COMPRAS */
+  /* LOGO CARRITO DE COMPRAS */
 
 
   #carritoCompras{
-    margin-left: 580px;
+    margin-left: 1100px;
+  }
+
+
+  /* LOGO CARRITO Laptops y tabletas grandes */
+
+  @media(min-width: 1024px) and (max-width: 1439px){
+
+    #carritoCompras{
+      margin-left: 580px;
+    }
+
   }

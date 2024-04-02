@@ -30,6 +30,22 @@
 
         <h1 id = "h1Inicio">Carrito de Compras: </h1><br><br>
         <ul id="carrito"></ul>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Recuperar los productos del almacenamiento local
+                var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+                var carritoElement = document.getElementById("carrito");
+                
+                // Mostrar los productos en el carrito
+                productosEnCarrito.forEach(function(producto) {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = producto.nombre + ": $" + producto.precio;
+                    carritoElement.appendChild(listItem);
+                });
+            });
+        </script>
+        <p id="total">Total a pagar: $<span id="totalAmount">0</span></p>
+        <button id="vaciarCarrito">Vaciar Carrito</button>
   
     </main>
 
@@ -47,6 +63,7 @@
     </footer>
 
     <script src="js/script.js"></script>
+ 
 
 
 </body>

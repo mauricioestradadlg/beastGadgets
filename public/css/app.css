@@ -335,3 +335,22 @@ button{
   text-shadow: 2px 5px 5px black;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+
+  /*CARRITO DE COMPRAS */
+
+
+  #carrito, #total{
+    font-size: 20px;
+    color: white;
+    text-shadow: 2px 5px 5px black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  #total{
+
+    font-size: 40px;
+  }
