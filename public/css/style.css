@@ -174,12 +174,33 @@ header{
   }
 
 
+  /* LOGO CARRITO Smartphones */
+  
+  @media (max-width: 767px){
+
+    #carritoCompras{
+      margin-left: 5px;
+      margin-bottom: 40px;
+    }
+  
+  
+  }
+
+  /* LOGO CARRITO Tabletas pequeñas */
+  @media (min-width: 768px) and (max-width: 1023px){
+
+    #carritoCompras{
+      margin-left: 100px;
+    }
+  }
+
+
   /* LOGO CARRITO Laptops y tabletas grandes */
 
   @media(min-width: 1024px) and (max-width: 1439px){
 
     #carritoCompras{
-      margin-left: 580px;
+      margin-left: 500px;
     }
 
   }
