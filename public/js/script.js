@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Recuperar los productos del almacenamiento local
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
     var carritoElement = document.getElementById("carrito");
+    var totalAmountElement = document.getElementById("totalAmount");
     var vaciarCarritoBtn = document.getElementById("vaciarCarrito");
     
     // Mostrar los productos en el carrito
@@ -34,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Limpiar la lista de productos en el carrito
         carritoElement.innerHTML = "";
 
-          // Reiniciar el total a pagar a 0
-          totalAmountElement.textContent = "0";
+        // Reiniciar el total a pagar a 0
+        totalAmountElement.textContent = "0";
     });
 });
 
