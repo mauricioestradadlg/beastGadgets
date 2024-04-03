@@ -1,6 +1,6 @@
 
-function agregarCarrito(nombre, precio) {
-    var producto = { nombre: nombre, precio: precio };
+function agregarCarrito(nombre, precio, id) {
+    var producto = { nombre: nombre, precio: precio, id: id };
     
     // Recuperar los productos del almacenamiento local o inicializar un array vacío si no hay ninguno
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
