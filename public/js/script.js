@@ -1,6 +1,6 @@
 
-function agregarCarrito(nombre, precio, id) {
-    var producto = { nombre: nombre, precio: precio, id: id };
+function agregarCarrito(nombre, precio, idProductoStripe) {
+    var producto = { nombre: nombre, precio: precio, idProductoStripe: idProductoStripe };
     
     // Recuperar los productos del almacenamiento local o inicializar un array vacío si no hay ninguno
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
@@ -60,4 +60,32 @@ function mostrarProductosEnCarrito(productosEnCarrito) {
 
     // Mostrar el total a pagar
     totalAmountElement.textContent = totalAmount;
+}
+
+function comprarCarrito() {
+    // Obtener productos en el carrito del almacenamiento local
+    const productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+    
+    // Enviar la información del carrito al servidor
+    fetch('/pagar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productosEnCarrito: productosEnCarrito })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error('Error al crear la sesión de pago');
+    })
+    .then(data => {
+        // Redirigir al usuario a la página de pago de Stripe
+        window.location.href = data.url;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Manejar el error, por ejemplo, mostrar un mensaje al usuario
+    });
 }

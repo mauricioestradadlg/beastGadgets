@@ -46,7 +46,7 @@
         </script>
         <p id="total">Total a pagar: $<span id="totalAmount">0</span></p>
         <button id="vaciarCarrito">Vaciar Carrito</button>
-        <button id="comprarCarrito" onclick="comprarCarrito()">Comprar Carrito</button>
+        <button id="comprarCarrito" onclick ="comprarCarrito()">Comprar Carrito</button>
   
     </main>
 
@@ -64,26 +64,7 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-        function comprarCarrito() {
-            // Realizar una solicitud al backend para crear la sesión de pago con Stripe
-            fetch('/pagar')
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Error al crear la sesión de pago');
-                })
-                .then(data => {
-                    // Redirigir al usuario a la página de pago de Stripe
-                    window.location.href = data.url;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Manejar el error, por ejemplo, mostrar un mensaje al usuario
-                });
-        }
-    </script>
+
  
 
 
