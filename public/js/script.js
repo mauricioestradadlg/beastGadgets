@@ -1,6 +1,5 @@
-
-function agregarCarrito(nombre, precio, idProductoStripe) {
-    var producto = { nombre: nombre, precio: precio, idProductoStripe: idProductoStripe };
+function agregarCarrito(nombre, precio) {
+    var producto = { nombre: nombre, precio: precio }; // Incluye el precio en el objeto producto
     
     // Recuperar los productos del almacenamiento local o inicializar un array vacío si no hay ninguno
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
@@ -15,7 +14,6 @@ function agregarCarrito(nombre, precio, idProductoStripe) {
     // Redirigir al usuario a la página del carrito
     window.location.href = "carrito.html";
 }
-
 
 document.addEventListener("DOMContentLoaded", function() {
     // Recuperar los productos del almacenamiento local
@@ -62,12 +60,14 @@ function mostrarProductosEnCarrito(productosEnCarrito) {
     totalAmountElement.textContent = totalAmount;
 }
 
+
+    
 function comprarCarrito() {
     // Obtener productos en el carrito del almacenamiento local
     const productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
     
     // Enviar la información del carrito al servidor
-    fetch('/pagar', {
+    fetch('/guardarCompra', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -76,13 +76,24 @@ function comprarCarrito() {
     })
     .then(response => {
         if (response.ok) {
+            // Reiniciar el carrito (eliminar los productos del almacenamiento local)
+            localStorage.removeItem("productosEnCarrito");
+            
+            // Limpiar la lista de productos en el carrito
+            var carritoElement = document.getElementById("carrito");
+            carritoElement.innerHTML = "";
+
+            // Reiniciar el total a pagar a 0
+            var totalAmountElement = document.getElementById("totalAmount");
+            totalAmountElement.textContent = "0";
+
             return response.json();
         }
-        throw new Error('Error al crear la sesión de pago');
+        throw new Error('Error al enviar la compra');
     })
     .then(data => {
-        // Redirigir al usuario a la página de pago de Stripe
-        window.location.href = data.url;
+        // Redirigir al usuario a la página de éxito
+        window.location.href = 'pago-exitoso.html';
     })
     .catch(error => {
         console.error('Error:', error);
