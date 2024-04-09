@@ -1,5 +1,5 @@
 function agregarCarrito(nombre, precio) {
-    var producto = { nombre: nombre, precio: precio }; // Incluye el precio en el objeto producto
+    var producto = { nombre: nombre, precio: precio };
     
     // Recuperar los productos del almacenamiento local o inicializar un array vacío si no hay ninguno
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
@@ -7,13 +7,21 @@ function agregarCarrito(nombre, precio) {
     // Agregar el nuevo producto al array
     productosEnCarrito.push(producto);
     
+    console.log('Productos en el carrito:', productosEnCarrito); // Agregar este registro de consola
+    
     // Guardar el array actualizado en el almacenamiento local
     localStorage.setItem("productosEnCarrito", JSON.stringify(productosEnCarrito));
     
     window.alert("Producto agregado al carrito!");
     // Redirigir al usuario a la página del carrito
     window.location.href = "carrito.html";
+
+    console.log('Productos en el carrito:', productosEnCarrito); // Agregar este registro de consola
 }
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     // Recuperar los productos del almacenamiento local
@@ -58,13 +66,15 @@ function mostrarProductosEnCarrito(productosEnCarrito) {
 
     // Mostrar el total a pagar
     totalAmountElement.textContent = totalAmount;
+    console.log('Productos en el carrito:', productosEnCarrito); // Agregar este registro de consola
 }
 
 
-    
 function comprarCarrito() {
     // Obtener productos en el carrito del almacenamiento local
     const productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+    
+    
     
     // Enviar la información del carrito al servidor
     fetch('/guardarCompra', {
@@ -76,17 +86,6 @@ function comprarCarrito() {
     })
     .then(response => {
         if (response.ok) {
-            // Reiniciar el carrito (eliminar los productos del almacenamiento local)
-            localStorage.removeItem("productosEnCarrito");
-            
-            // Limpiar la lista de productos en el carrito
-            var carritoElement = document.getElementById("carrito");
-            carritoElement.innerHTML = "";
-
-            // Reiniciar el total a pagar a 0
-            var totalAmountElement = document.getElementById("totalAmount");
-            totalAmountElement.textContent = "0";
-
             return response.json();
         }
         throw new Error('Error al enviar la compra');

@@ -77,7 +77,8 @@ app.post('/formulario-beastGadgets', async (req, res) => {
 
 //Transacciones
 
-// Definir el esquema de compra
+app.use(express.json()); // Middleware para analizar JSON
+
 const compraSchema = new mongoose.Schema({
     productos: [{
         nombre: String,
@@ -87,20 +88,12 @@ const compraSchema = new mongoose.Schema({
 
 const Compra = mongoose.model('Compra', compraSchema);
 
-// Manejar la solicitud para guardar una compra
 app.post('/guardarCompra', async (req, res) => {
     try {
         const { productosEnCarrito } = req.body;
-        console.log("Datos recibidos del cliente:", productosEnCarrito); // Verificar los datos recibidos
 
-        // Convertir los productosEnCarrito en objetos antes de guardarlos
-        const productos = productosEnCarrito.map(producto => ({
-            nombre: producto.nombre,
-            precio: producto.precio
-        }));
-
-        // Guardar la compra en la base de datos MongoDB
-        await Compra.create({ productos });
+        // Guardar la compra en la colección Compra
+        await Compra.create({ productos: productosEnCarrito });
         
         console.log('Compra registrada en la base de datos');
         res.json({ message: 'Compra registrada exitosamente' });
@@ -110,10 +103,13 @@ app.post('/guardarCompra', async (req, res) => {
     }
 });
 
+
+
+
 // Servir los archivos estáticos desde la carpeta public
 app.use(express.static('public'));
 
-app.use(express.json()); // Middleware para analizar JSON
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {
