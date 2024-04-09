@@ -105,7 +105,6 @@ app.post('/guardarCompra', async (req, res) => {
 
 
 
-
 // Servir los archivos estáticos desde la carpeta public
 app.use(express.static('public'));
 
