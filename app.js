@@ -1,22 +1,13 @@
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-
-
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Usamos el puerto proporcionado por Render o 3000 por defecto
-
-
-
-
+const PORT = process.env.PORT || 3000;
 
 // Conexión a la base de datos MongoDB Atlas
-const mongoURI = 'mongodb+srv://miUsuario:miContraseña@micluster.swcrigj.mongodb.net/?retryWrites=true&w=majority&appName=miCluster';// Lee la cadena de conexión de la variable de entorno
-
-
-mongoose.connect(mongoURI, {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -25,90 +16,57 @@ mongoose.connect(mongoURI, {
     console.error('Error al conectar a la base de datos:', error);
 });
 
-
-// Definir el esquema del cliente
-const userBeastGadgets = new mongoose.Schema({
-    nombre: String,
-    correo: String,
-    mensaje: String
-});
-
-
-// Definir el modelo de Usuario
-const Usuario = mongoose.model('Usuario', userBeastGadgets); // Agrega esta línea para definir el modelo Usuario
-
-
-
 // Middleware para analizar el cuerpo de las solicitudes
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-// Manejar la solicitud para registrar un nuevo usuario
-app.post('/formulario-beastGadgets', async (req, res) => {
-    try {
-        const { nombre, correo, mensaje } = req.body;
-
-        // Crear un nuevo usuario
-        const newUser = new Usuario({
-            nombre,
-            correo,
-            mensaje
-        });
-
-        // Guardar el usuario en la base de datos
-        await newUser.save();
-        console.log('Formulario enviado correctamente');
-
-        
-        // Redirigir al usuario a una página de éxito o mostrar un mensaje de éxito
-        res.send('¡Formulario enviado correctamente!');
-        
-
-        // Redirigir al usuario a una página de éxito
-        
-        res.redirect('/exito.html'); // Cambiar a la ruta de tu página de éxito
-    } 
-    catch (error) {
-        console.error('Error al enviar el formulario:', error);
-        res.status(500).send('Error al enviar el formulario');
-    }
-});
-
-
-//Transacciones
-
-app.use(express.json()); // Middleware para analizar JSON
-
+// Definir esquema y modelo de compra
 const compraSchema = new mongoose.Schema({
     productos: [{
         nombre: String,
         precio: Number,
+        idProducto: String // ID de producto en Stripe
     }]
 });
-
 const Compra = mongoose.model('Compra', compraSchema);
 
-app.post('/guardarCompra', async (req, res) => {
+// Ruta para procesar la compra y realizar el pago en Stripe
+app.post('/comprar', async (req, res) => {
     try {
         const { productosEnCarrito } = req.body;
 
-        // Guardar la compra en la colección Compra
-        await Compra.create({ productos: productosEnCarrito });
-        
-        console.log('Compra registrada en la base de datos');
-        res.json({ message: 'Compra registrada exitosamente' });
+        // Crear una compra en la base de datos
+        const nuevaCompra = new Compra({ productos: productosEnCarrito });
+        await nuevaCompra.save();
+
+        // Crear una lista de ítems para el pago en Stripe
+        const items = productosEnCarrito.map(producto => ({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: producto.nombre,
+                },
+                unit_amount: producto.precio * 100, // Precio en centavos
+            },
+            quantity: 1,
+        }));
+
+        // Crear una sesión de checkout en Stripe
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: items,
+            mode: 'payment',
+            success_url: 'http://localhost:3000/exito.html', // URL de éxito
+            cancel_url: 'http://localhost:3000/cancelado.html', // URL de cancelación
+        });
+
+        // Enviar el ID de sesión al frontend para redireccionar al checkout de Stripe
+        res.json({ id: session.id });
     } catch (error) {
-        console.error('Error al guardar la compra:', error);
+        console.error('Error al procesar la compra:', error);
         res.status(500).json({ error: 'Error al procesar la compra' });
     }
 });
-
-
-
-// Servir los archivos estáticos desde la carpeta public
-app.use(express.static('public'));
-
-
 
 // Iniciar el servidor
 app.listen(PORT, () => {

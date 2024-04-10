@@ -1,5 +1,5 @@
 function agregarCarrito(nombre, precio) {
-    var producto = { nombre: nombre, precio: precio };
+    var producto = { nombre: nombre, precio: precio};
     
     // Recuperar los productos del almacenamiento local o inicializar un array vacío si no hay ninguno
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
@@ -71,8 +71,17 @@ function mostrarProductosEnCarrito(productosEnCarrito) {
 
 
 function comprarCarrito() {
-    // Obtener productos en el carrito del almacenamiento local
-    const productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+    
+     // Obtener productos en el carrito del almacenamiento local
+     const productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+    
+     
+     // Modificar el objeto que se envía al servidor para incluir el ID de producto
+     const productosParaEnviar = productosEnCarrito.map(producto => ({
+         nombre: producto.nombre,
+         precio: producto.precio,
+         id: producto.id // Agregar el ID de producto
+     }));
     
     
     
@@ -93,9 +102,22 @@ function comprarCarrito() {
     .then(data => {
         // Redirigir al usuario a la página de éxito
         window.location.href = 'pago-exitoso.html';
+         // Agregar event listener para el botón de vaciar carrito
+
+
+        // Vaciar el carrito (eliminar los productos del almacenamiento local)
+        localStorage.removeItem("productosEnCarrito");
+        
+        // Limpiar la lista de productos en el carrito
+        carritoElement.innerHTML = "";
+
+        // Reiniciar el total a pagar a 0
+        totalAmountElement.textContent = "0";
     })
     .catch(error => {
         console.error('Error:', error);
         // Manejar el error, por ejemplo, mostrar un mensaje al usuario
     });
 }
+
+
