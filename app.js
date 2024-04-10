@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -19,6 +19,8 @@ mongoose.connect(process.env.MONGO_URI, {
 // Middleware para analizar el cuerpo de las solicitudes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Servir los archivos estáticos desde la carpeta public
+app.use(express.static('public'));
 
 // Definir esquema y modelo de compra
 const compraSchema = new mongoose.Schema({
@@ -42,7 +44,7 @@ app.post('/comprar', async (req, res) => {
         // Crear una lista de ítems para el pago en Stripe
         const items = productosEnCarrito.map(producto => ({
             price_data: {
-                currency: 'usd',
+                currency: 'mxn',
                 product_data: {
                     name: producto.nombre,
                 },
@@ -56,8 +58,8 @@ app.post('/comprar', async (req, res) => {
             payment_method_types: ['card'],
             line_items: items,
             mode: 'payment',
-            success_url: 'http://localhost:3000/exito.html', // URL de éxito
-            cancel_url: 'http://localhost:3000/cancelado.html', // URL de cancelación
+            success_url: 'http://localhost:3000/pago-exitoso.html', // URL de éxito
+            cancel_url: 'http://localhost:3000/carrito.html', // URL de cancelación
         });
 
         // Enviar el ID de sesión al frontend para redireccionar al checkout de Stripe
@@ -67,6 +69,7 @@ app.post('/comprar', async (req, res) => {
         res.status(500).json({ error: 'Error al procesar la compra' });
     }
 });
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {

@@ -1,5 +1,5 @@
-function agregarCarrito(nombre, precio) {
-    var producto = { nombre: nombre, precio: precio};
+function agregarCarrito(nombre, precio, productId) {
+    var producto = { nombre: nombre, precio: precio, productId: productId};
     
     // Recuperar los productos del almacenamiento local o inicializar un array vacío si no hay ninguno
     var productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
@@ -121,3 +121,24 @@ function comprarCarrito() {
 }
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Manejar clic en el botón de compra
+    document.getElementById("comprarCarrito").addEventListener("click", async function() {
+        const productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+
+        // Enviar los productos al servidor para procesar la compra en Stripe
+        const response = await fetch('/comprar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productosEnCarrito })
+        });
+
+        const { id } = await response.json();
+
+        // Redireccionar al checkout de Stripe
+        const stripe = Stripe('pk_test_51OpYfERqLhXyfZHFeE0ReyNR2mNsAGQK0hfgiPiypxgp4nDk1BMCmvlXfn86OkbVV7dsBJjV3CYFTfJt3Jo3mbgJ00zQeHtM7Y');
+        stripe.redirectToCheckout({ sessionId: id });
+    });
+});
