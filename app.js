@@ -22,6 +22,47 @@ app.use(express.urlencoded({ extended: true }));
 // Servir los archivos estáticos desde la carpeta public
 app.use(express.static('public'));
 
+// Definir el esquema del cliente
+const userBeastGadgets = new mongoose.Schema({
+    nombre: String,
+    correo: String,
+    mensaje: String
+});
+
+
+// Definir el modelo de Usuario
+const Usuario = mongoose.model('Usuario', userBeastGadgets); // Agrega esta línea para definir el modelo Usuario
+
+
+
+// Manejar la solicitud para registrar un nuevo usuario
+app.post('/formulario-beastGadgets', async (req, res) => {
+    try {
+        const { nombre, correo, mensaje } = req.body;
+
+        // Crear un nuevo usuario
+        const newUser = new Usuario({
+            nombre,
+            correo,
+            mensaje
+        });
+
+        // Guardar el usuario en la base de datos
+        await newUser.save();
+        console.log('Formulario enviado correctamente');
+
+
+        // Redirigir al usuario a una página de éxito
+        
+        res.redirect('/exito.html'); // Cambiar a la ruta de tu página de éxito
+    } 
+    catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        res.status(500).send('Error al enviar el formulario');
+    }
+});
+
+
 // Definir esquema y modelo de compra
 const compraSchema = new mongoose.Schema({
     productos: [{
