@@ -58,8 +58,8 @@ app.post('/comprar', async (req, res) => {
             payment_method_types: ['card'],
             line_items: items,
             mode: 'payment',
-            success_url: 'http://localhost:3000/pago-exitoso.html' || 'https://beastgadgets.onrender.com/pago-exitoso.html', // URL de éxito
-            cancel_url: 'http://localhost:3000/carrito.html' || 'https://beastgadgets.onrender.com/carrito.html' // URL de cancelación
+            success_url: 'https://beastgadgets.onrender.com/pago-exitoso.html', // URL de éxito
+            cancel_url:  'https://beastgadgets.onrender.com/carrito.html' // URL de cancelación
         });
 
         // Enviar el ID de sesión al frontend para redireccionar al checkout de Stripe
