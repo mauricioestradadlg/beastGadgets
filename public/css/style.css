@@ -145,6 +145,23 @@ header{
     }
   }
 
+  /* Color al seleccionar una opcion de la navegacion*/
+.navbar a:hover{
+  transform: scale(1.5); /* Escala el elemento al 110% del tamaño original */
+}
+
+/* Color al seleccionar una opcion de la navegacion*/
+.navbar li:hover{
+  background-color: hsl(352, 64%, 36%);
+}
+
+
+.navbar li{
+  float: left;
+  transition: transform 0.3s ease; /* Transición suave al hacer hover */
+}
+
+
   /* FOOTER */
 
   footer{
@@ -204,3 +221,78 @@ header{
     }
 
   }
+
+
+
+  /* Boton WhatsApp*/
+
+  .whatsapp-button {
+    position: fixed; /* Hace que el botón sea fijo en la pantalla */
+    bottom: 20px; /* Distancia desde la parte inferior */
+    right: 20px; /* Distancia desde el borde derecho */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+  .whatsapp-icon {
+    transition: transform 0.3s ease; /* Agrega una transición suave */
+    margin-left: 20px;
+}
+
+.whatsapp-icon:hover {
+    transform: scale(1.5); 
+}
+
+
+ /* Boton Wha Smartphones */
+  
+ @media (max-width: 767px){
+
+  .whatsapp-icon {
+    height: 50px;
+    width: 50px;
+}
+
+
+
+}
+
+
+
+
+/* Animación de carga */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos para el ícono de carga */
+.loading-icon {
+  width: 610px;
+  height: 610px;
+  border: 100px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  margin-left: 500px;
+  border-top-color: #3498db;
+  animation: spin 1s linear infinite; /* Aplicar la animación de rotación */
+}
+
+
+
+/* Carga de Pantalla */
+
+@media(min-width: 1024px) and (max-width: 1439px){
+
+
+   /* Estilos para el ícono de carga */
+.loading-icon {
+  width: 310px;
+  height: 310px;
+  border: 100px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  margin-left: 400px;
+  border-top-color: #3498db;
+  animation: spin 1s linear infinite; /* Aplicar la animación de rotación */
+
+}
+
+}
